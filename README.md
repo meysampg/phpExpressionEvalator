@@ -1,0 +1,4 @@
+phpExpressionEvalator
+=====================
+
+Evaluate arithmitic expression
