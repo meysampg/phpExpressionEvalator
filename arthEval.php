@@ -1,12 +1,8 @@
 <?php
-if($argc == 1)
-{
+if ($argc == 1) {
     echo "Run code as 'php strEval.php arg1 arg2 such that argK is a string like 2*3+1\n";
-}
-else
-{
-    for($i = 1; $i < count($argv); ++$i)
-    {
+} else {
+    for ($i = 1; $i < count($argv); ++$i) {
         echo $argv[$i] . " = " . strEval($argv[$i]) . "\n";
     }
 }
@@ -23,17 +19,14 @@ function strEval($sExpr)
     $aPostfToInf = array();
     $nPosToInInde = 0;
 
-    for($i=0; $i<count($aExpr); ++$i)
-    {
-        switch($aExpr[$i])
-        {
+    for ($i=0; $i<count($aExpr); ++$i) {
+        switch ($aExpr[$i]) {
             case '(':
                 $aPostfToInf[$nPosToInInde] = '(';
                 ++$nPosToInInde;
                 break;
             case ')':
-                while($aPostfToInf[$nPosToInInde-1] != '(')
-                {
+                while ($aPostfToInf[$nPosToInInde-1] != '(') {
                     $aRpn[] = $aPostfToInf[$nPosToInInde-1];
                     --$nPosToInInde;
                 }
@@ -44,25 +37,19 @@ function strEval($sExpr)
             case '*':
             case '/':
             case '^':
-                if($nPosToInInde == 0)
-                {
+                if ($nPosToInInde == 0) {
                     $aPostfToInf[0] = $aExpr[$i];
                     ++$nPosToInInde;
-                }
-                else
-                {
-                    while(($nPosToInInde != 0) && ($aPostfToInf[$nPosToInInde-1] != '('))
-                    {
-                        if($aOprPrec[$aExpr[$i]] <= $aOprPrec[$aPostfToInf[$nPosToInInde-1]])
-                        {
+                } else {
+                    while (($nPosToInInde != 0) && ($aPostfToInf[$nPosToInInde-1] != '(')) {
+                        if ($aOprPrec[$aExpr[$i]] <= $aOprPrec[$aPostfToInf[$nPosToInInde-1]]) {
                             $aRpn[] = $aPostfToInf[$nPosToInInde-1];
                             --$nPosToInInde;
-                        }
-                        else
-                        {
+                        } else {
                             break;
                         }
                     }
+
                     ++$nPosToInInde;
                     $aPostfToInf[$nPosToInInde-1] = $aExpr[$i];
                 }
@@ -71,25 +58,23 @@ function strEval($sExpr)
                 $aRpn[] = $aExpr[$i];
         }
     }
-    while($nPosToInInde)
-    {
+
+    while ($nPosToInInde) {
         $aRpn[] = $aPostfToInf[$nPosToInInde-1];
         --$nPosToInInde;
     }
 
     $aPosfEval = array();
     $nPosfEval = 0;
-    for($i=0; $i<count($aRpn); ++$i)
-    {
-        switch($aRpn[$i])
-        {
+    for ($i=0; $i<count($aRpn); ++$i) {
+        switch ($aRpn[$i]) {
             case '+':
             case '-':
             case '*':
             case '/':
             case '^':
-				$aPosfEval[$nPosfEval - 2] = doOperator($aPosfEval[$nPosfEval-2], $aPosfEval[$nPosfEval-1], $aRpn[$i]);
-				--$nPosfEval;
+                $aPosfEval[$nPosfEval - 2] = doOperator($aPosfEval[$nPosfEval-2], $aPosfEval[$nPosfEval-1], $aRpn[$i]);
+                --$nPosfEval;
                 break;
             default:
                 $aPosfEval[$nPosfEval] = $aRpn[$i];
@@ -102,8 +87,7 @@ function strEval($sExpr)
 
 function doOperator($a, $b, $opr)
 {
-    switch($opr)
-    {
+    switch ($opr) {
         case '+':
             return ((float)$a + (float)$b);
         case '-':
