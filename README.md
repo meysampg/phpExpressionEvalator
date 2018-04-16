@@ -1,5 +1,6 @@
 phpExpressionEvalator
 =====================
+[![StyleCI Check](https://styleci.io/repos/21501446/shield?style=flat&branch=master)](https://styleci.io/repos/21501446)
 
 Evaluate arithmitic expression.
 
