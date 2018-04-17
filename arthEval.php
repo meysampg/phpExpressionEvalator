@@ -19,8 +19,7 @@ function strEval($sExpr)
     $aPostfToInf = array();
     $nPosToInInde = 0;
 
-    for($i=0; $i<count($aExpr); ++$i) 
-    {
+    for ($i=0; $i<count($aExpr); ++$i) {
         switch ($aExpr[$i]) {
             case '(':
                 $aPostfToInf[$nPosToInInde] = '(';
@@ -41,8 +40,7 @@ function strEval($sExpr)
                 if ($nPosToInInde == 0) {
                     $aPostfToInf[0] = $aExpr[$i] ;
                     ++$nPosToInInde;
-                } else 
-                {
+                } else {
                     while (($nPosToInInde != 0) && ($aPostfToInf[$nPosToInInde-1] != '(')) {
                         if ($aOprPrec[$aExpr[$i]] <= $aOprPrec[$aPostfToInf[$nPosToInInde-1]]) {
                             $aRpn[] = $aPostfToInf[$nPosToInInde-1];
