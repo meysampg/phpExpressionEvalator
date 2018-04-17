@@ -39,9 +39,10 @@ function strEval($sExpr)
             case '/':
             case '^':
                 if ($nPosToInInde == 0) {
-                    $aPostfToInf[0] = $aExpr[$i];
+                    $aPostfToInf[0] = $aExpr[$i] ;
                     ++$nPosToInInde;
-                } else {
+                } else 
+                {
                     while (($nPosToInInde != 0) && ($aPostfToInf[$nPosToInInde-1] != '(')) {
                         if ($aOprPrec[$aExpr[$i]] <= $aOprPrec[$aPostfToInf[$nPosToInInde-1]]) {
                             $aRpn[] = $aPostfToInf[$nPosToInInde-1];
