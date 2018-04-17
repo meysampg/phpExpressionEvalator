@@ -20,7 +20,8 @@ function strEval($sExpr)
     $nPosToInInde = 0;
 
     for ($i=0; $i<count($aExpr); ++$i) {
-        switch ($aExpr[$i]) {
+        switch ($aExpr[$i]) 
+        {
             case '(':
                 $aPostfToInf[$nPosToInInde] = '(';
                 ++$nPosToInInde;
